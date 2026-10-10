@@ -1,0 +1,23 @@
+---
+description: TypeScript conventions for app modules and Vue SFCs
+globs: src/**/*.{ts,vue}
+alwaysApply: false
+---
+
+# TypeScript
+
+`tsconfig.app.json` enables `noUnusedLocals`, `noUnusedParameters`, and `erasableSyntaxOnly`. New code must pass `pnpm build`.
+
+- Annotate function returns, props, and emits. Leave `any` out.
+- Import types with `import type`.
+- Model variants as string unions and `interface`s. `enum`, namespaces, and parameter properties fail `erasableSyntaxOnly`.
+- Narrow `unknown` before use (`instanceof`, `Array.isArray`, a discriminant).
+- Keep SFCs thin. Scoring, prompts, flow, and export stay in `.ts` modules.
+
+```ts
+export type Stage = 'welcome' | 'items' | 'results'
+
+export function isStage(value: unknown): value is Stage {
+  return value === 'welcome' || value === 'items' || value === 'results'
+}
+```

@@ -1,0 +1,26 @@
+---
+description: Vue SFCs styled with daisyUI components and Tailwind utilities
+globs: src/**/*.vue
+alwaysApply: false
+---
+
+# UI
+
+Prefer a daisyUI component over raw CSS. Use Tailwind utilities for layout and spacing. Tailwind v4 is loaded by `@tailwindcss/vite`; tokens live in `src/style.css`. Leave `tailwind.config.js` and component `<style>` blocks out unless no daisyUI or Tailwind class exists.
+
+## daisyUI
+
+- Buttons: `btn btn-primary`, `btn btn-outline`, `btn btn-ghost`. Set `type="button"` on buttons that do not submit a form.
+- Choices: `checkbox checkbox-primary` or `radio radio-primary` inside `fieldset` and `fieldset-label`.
+- Surfaces: `rounded-box border border-base-300 bg-base-100`.
+- Groups: `join` with `join-item`. Navigation: `navbar`.
+
+## Color
+
+Use semantic theme colors (`bg-base-100`, `text-base-content`, `border-error`, `btn-primary`). Change the palette only in the `discovery` block in `src/style.css`.
+
+```vue
+<button type="button" class="btn btn-primary" @click="emit('next')">Continue</button>
+```
+
+Put shared element styles in `@layer base` in `src/style.css`. Component files style through the `class` attribute.

@@ -1,0 +1,45 @@
+---
+description: Project stack, daisyUI-first UI, and coding practices
+alwaysApply: true
+---
+
+# Stack
+
+Vue 3 + TypeScript on Vite. Style with Tailwind CSS v4 and daisyUI 5. The only theme is `discovery` in `src/style.css`.
+
+## Package manager
+
+Use pnpm for every install and script. The lockfile is `pnpm-lock.yaml`.
+
+```bash
+pnpm install
+pnpm add <pkg>
+pnpm add -D <pkg>
+pnpm dev
+pnpm test
+pnpm build
+```
+
+## Layout
+
+- UI: `src/components` and `src/views`, as `<script setup lang="ts">` SFCs
+- Session state: `src/composables`
+- Domain logic: plain `.ts` modules (`src/scoring`, `src/prompt`, `src/flow`, `src/data`, `src/export`)
+- Tests: Vitest files named `*.test.ts` beside the module they cover
+
+Check types and produce a build with `pnpm build` (`vue-tsc -b && vite build`). Run unit tests with `pnpm test`.
+
+## UI
+
+Use a daisyUI component class before writing CSS. Use Tailwind utilities for layout and spacing. Add a `<style>` block or a rule in `src/style.css` only when daisyUI and Tailwind have no class for that job.
+
+```vue
+<button type="button" class="btn btn-primary">Continue</button>
+```
+
+## Practices
+
+- Composition API with typed `defineProps` and `defineEmits`. Keep SFCs presentational; put scoring, prompts, and flow in `.ts` modules.
+- Name values for what they represent. Give each function one job. Reuse an existing component or composable before adding another.
+- Semantic HTML: associate a label with every control, set `type` on buttons, and keep keyboard focus visible.
+- Strict TypeScript: annotate public types, skip `any`, and model variants as string unions.

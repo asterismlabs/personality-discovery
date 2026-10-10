@@ -1,0 +1,28 @@
+---
+description: Vue 3 single-file component conventions
+globs: "**/*.vue"
+alwaysApply: false
+---
+
+# Vue
+
+Use `<script setup lang="ts">`. One component per file. Type props and emits.
+
+```vue
+<script setup lang="ts">
+defineProps<{
+  saveLocally: boolean
+}>()
+
+const emit = defineEmits<{
+  'update:saveLocally': [value: boolean]
+  clear: []
+}>()
+</script>
+```
+
+- Views in `src/views` compose widgets from `src/components`.
+- Read and write session state through `useSession`. Views do not touch `localStorage`.
+- Buttons that do not submit a form use `type="button"`.
+- Keep controls labeled. Preserve the skip link, focus moves after navigation, and `aria-invalid` on failed items.
+- Reach for an existing daisyUI component class before writing a custom control. Styling rules are in `tailwind-daisyui.mdc`.
